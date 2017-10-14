@@ -6,57 +6,76 @@ import (
 	"os"
 	"strconv"
 	"log"
-	"archive/zip"
+	//"archive/zip"
+	//"io"
+	"github.com/yeka/zip"
+	//"bytes"
+	//"bytes"
+	//"io"
+	//"bytes"
 	"io"
 )
 
 const (
 	N = 10 							// 読み込み行数の最大値
 	INFILE = "./credentials.csv"    // 読み込みcsvファイル名を指定
+	PW = "hoge"
 )
 
-// エラー処理
 func fileError(err error){
 	if err != nil {
 		log.Fatal("Error", err)
 	}
 }
 
-
-// CSVファイルを作成する
-func outputFiles(_lineIn int, _buffIn [N]string){
+func outputFiles(_lineIn int, _buffIn [N]string){   
 	var lineOut int
 	var outFilename string
 	var outFilenameZip string
 
-	// 2行目以降の行数だけファイルを作成(ユーザ毎にファイル作成)
 	for lineOut = 0; lineOut < _lineIn; lineOut++ {
 
 		if lineOut != 0 {
 			outFilename = "./output"+strconv.Itoa(lineOut)+".csv"
-			file, err := os.Create(outFilename)
-			file.Write(([]byte)(_buffIn[0]+"\n"))
+			file, err := os.Create(outFilename)      
+			file.Write(([]byte)(_buffIn[0]+"\n"))    
 			file.Write(([]byte)(_buffIn[lineOut]))
 
-			fileError(err)
-			defer file.Close()
+			fileError(err)                           
+			defer file.Close()                       
 
-			// File(csv)をzip化する
-			outFilenameZip = outFilename+".zip"
-			outFilenameZip, err := os.Create(outFilenameZip)
-			fileError(err)
+			outFilenameZip = outFilename+".zip"               
+			outFilenameZip, err := os.Create(outFilenameZip)  
+			fileError(err)									  
 
-			zipWriter := zip.NewWriter(outFilenameZip)
-			defer zipWriter.Close()
+			zipWriter := zip.NewWriter(outFilenameZip)        
+			defer zipWriter.Close()                           
 
-			if err := makeZip(outFilename, zipWriter); err != nil {
+			if err := makeZip(outFilename, zipWriter); err != nil { 
 				panic(err)
 			}
 		}
-
 	}
-
 }
+
+
+func makeZip(filename string, zipWriter *zip.Writer) error {
+
+	password := PW
+
+	src, err := os.Open(filename)
+	fileError(err)
+	defer src.Close()
+
+	dest, err := zipWriter.Encrypt(filename, password, zip.AES256Encryption)
+	fileError(err)
+
+	_, err = io.Copy(dest, src)  
+	fileError(err)
+
+	return nil
+}
+
 
 func main() {
 	var fp *os.File
@@ -64,7 +83,6 @@ func main() {
 	var lineIn int
 	var buffIn [N]string
 
-	// Input File
 	if len(os.Args) < 1 {
 		fp  = os.Stdin
 	} else {
@@ -73,32 +91,16 @@ func main() {
 		defer fp.Close()
 	}
 
-	// 1行ずつファイルを読み込む
 	scanner := bufio.NewScanner(fp)
-	for scanner.Scan() {
+	for scanner.Scan() {                    
 		buffIn[lineIn] = scanner.Text()
 		fmt.Println(scanner.Text())
-		lineIn ++ //行数インクリメント
+		lineIn ++
 	}
-	if err := scanner.Err(); err != nil {
+	if err := scanner.Err(); err != nil { 
 		panic(err)
 	}
-	// ファイル行数と行毎のデータを配列で渡す
-	outputFiles(lineIn, buffIn)
+	outputFiles(lineIn, buffIn)           
 }
 
-// File名を渡してzip化する
-func makeZip(filename string, zipWriter *zip.Writer) error{
 
-	src, err := os.Open(filename)
-	fileError(err)
-	defer src.Close()
-
-	writer, err := zipWriter.Create(filename)
-	fileError(err)
-
-	_, err = io.Copy(writer, src)
-	fileError(err)
-
-	return nil
-}

@@ -10,16 +10,17 @@ import (
 	//"io"
 	"github.com/yeka/zip"
 	//"bytes"
-	//"bytes"
 	//"io"
 	//"bytes"
 	"io"
+	"encoding/binary"
+	"crypto/rand"
 )
 
 const (
 	N = 10 							// 読み込み行数の最大値
 	INFILE = "./credentials.csv"    // 読み込みcsvファイル名を指定
-	PW = "hoge"
+	PWFILE = "zip-password.txt"
 )
 
 func fileError(err error){
@@ -28,30 +29,48 @@ func fileError(err error){
 	}
 }
 
-func outputFiles(_lineIn int, _buffIn [N]string){   
+func genRand() string {
+	var n uint64
+	binary.Read(rand.Reader, binary.LittleEndian, &n)
+	return strconv.FormatUint(n, 36)
+}
+
+func createPWFile(pw string){
+	file, err := os.Create(PWFILE)
+	fileError(err)
+	defer file.Close()
+
+	file.Write(([]byte)(pw))
+}
+
+func outputFiles(_lineIn int, _buffIn [N]string){
 	var lineOut int
 	var outFilename string
 	var outFilenameZip string
+
+	// パスワード付きzipのパスワードファイルを生成
+	password := genRand()
+	createPWFile(password)
 
 	for lineOut = 0; lineOut < _lineIn; lineOut++ {
 
 		if lineOut != 0 {
 			outFilename = "./output"+strconv.Itoa(lineOut)+".csv"
-			file, err := os.Create(outFilename)      
-			file.Write(([]byte)(_buffIn[0]+"\n"))    
+			file, err := os.Create(outFilename)
+			file.Write(([]byte)(_buffIn[0]+"\n"))
 			file.Write(([]byte)(_buffIn[lineOut]))
 
-			fileError(err)                           
-			defer file.Close()                       
+			fileError(err)
+			defer file.Close()
 
-			outFilenameZip = outFilename+".zip"               
-			outFilenameZip, err := os.Create(outFilenameZip)  
-			fileError(err)									  
+			outFilenameZip = outFilename+".zip"
+			outFilenameZip, err := os.Create(outFilenameZip)
+			fileError(err)
 
-			zipWriter := zip.NewWriter(outFilenameZip)        
-			defer zipWriter.Close()                           
+			zipWriter := zip.NewWriter(outFilenameZip)
+			defer zipWriter.Close()
 
-			if err := makeZip(outFilename, zipWriter); err != nil { 
+			if err := makeZip(outFilename, zipWriter, password); err != nil {
 				panic(err)
 			}
 		}
@@ -59,18 +78,16 @@ func outputFiles(_lineIn int, _buffIn [N]string){
 }
 
 
-func makeZip(filename string, zipWriter *zip.Writer) error {
-
-	password := PW
+func makeZip(filename string, zipWriter *zip.Writer, pw string) error {
 
 	src, err := os.Open(filename)
 	fileError(err)
 	defer src.Close()
 
-	dest, err := zipWriter.Encrypt(filename, password, zip.AES256Encryption)
+	dest, err := zipWriter.Encrypt(filename, pw, zip.AES256Encryption)
 	fileError(err)
 
-	_, err = io.Copy(dest, src)  
+	_, err = io.Copy(dest, src)
 	fileError(err)
 
 	return nil
@@ -86,21 +103,22 @@ func main() {
 	if len(os.Args) < 1 {
 		fp  = os.Stdin
 	} else {
-		fp, err = os.Open(INFILE)
+		//fp, err = os.Open(INFILE)
+		fp, err = os.Open(os.Args[1])
 		fileError(err)
 		defer fp.Close()
 	}
 
 	scanner := bufio.NewScanner(fp)
-	for scanner.Scan() {                    
+	for scanner.Scan() {
 		buffIn[lineIn] = scanner.Text()
 		fmt.Println(scanner.Text())
 		lineIn ++
 	}
-	if err := scanner.Err(); err != nil { 
+	if err := scanner.Err(); err != nil {
 		panic(err)
 	}
-	outputFiles(lineIn, buffIn)           
+	outputFiles(lineIn, buffIn)
 }
 
 

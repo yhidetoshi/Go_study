@@ -7,7 +7,7 @@
 - 環境　
   - OS: 
     - MacOS
-  - Goバージョン:  
+  - Goバージョン:  
     - go1.9
   - IDE: 
     - Gogland (https://www.jetbrains.com/go/)

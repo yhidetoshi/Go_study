@@ -1,4 +1,8 @@
-## Go strudy
+![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Go_study/Golang-top.png)
+
+## Go study
+
+
 
 - 環境　
   - OS: 

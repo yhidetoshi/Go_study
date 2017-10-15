@@ -1,6 +1,6 @@
 ![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Go_study/Golang-top.png)
 
-## Go study
+## Go言語 study
 
 
 
@@ -11,9 +11,12 @@
     - go1.9
   - IDE: 
     - Gogland (https://www.jetbrains.com/go/)
-  - Goglandのパス
+  - 学習
+    - `A Tour of Go` (https://go-tour-jp.appspot.com/welcome/1)
+    - `基礎からわかる Go言語`
+  - Goglandのパス:
     - `$HOME/go/src/github.com/`
-  - Goのパス
+  - Goのパス:
     - `$HOME/.go/src`
     
 ## Goのインストール

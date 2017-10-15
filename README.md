@@ -20,5 +20,6 @@
     - `$HOME/.go/src`
     
 ## Goのインストール
-- `brew install go`
-- `go version`
+- macOS
+  - `brew install go`
+  - `go version`

@@ -12,9 +12,11 @@
   - IDE: 
     - Gogland (https://www.jetbrains.com/go/)
   - 学習
-    - `A Tour of Go` (https://go-tour-jp.appspot.com/welcome/1)
-    - `基礎からわかる Go言語`
-  - Goglandのパス:
+    - A Tour of Go (https://go-tour-jp.appspot.com/welcome/1)
+    - 基礎からわかる Go言語
+    -  Paiza
+    - Tools作り
+  - Goglandのパス:
     - `$HOME/go/src/github.com/`
   - Goのパス:
     - `$HOME/.go/src`

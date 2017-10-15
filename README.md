@@ -16,9 +16,9 @@
     - 基礎からわかる Go言語
     - Paiza
     - Tools作り
-  - Goglandのパス(ex):
+  - Gogland(pkg)のパス(ex):
     - `$HOME/go/src/github.com/`
-  - Goのパス(ex):
+  - Go(pkg)のパス(ex):
     - `$HOME/.go/src`
     
 ## Goのインストール

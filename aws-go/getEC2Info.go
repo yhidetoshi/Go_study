@@ -15,17 +15,17 @@ func main() {
 		panic(err)
 	}
 
-	var tag_name string
+	var tagName string
 
 	for _, resInfo := range res.Reservations {
 		for _, instanceInfo := range resInfo.Instances {
 			for _, tagInfo := range instanceInfo.Tags {
 				if *tagInfo.Key == "Name" {
-					tag_name = *tagInfo.Value
+					tagName = *tagInfo.Value
 				}
 			}
 			fmt.Println(
-				tag_name,
+				tagName,
 				*instanceInfo.InstanceType,
 				*instanceInfo.Placement.AvailabilityZone,
 				*instanceInfo.State.Name,

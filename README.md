@@ -17,7 +17,7 @@
     - Paiza
     - Tools作り
     - aws-sdk-goを使ったツール作り
-  - Gogland(pkg)のパス(ex):
+  - Gogland(pkg)のパス(ex):
     - `$HOME/go/src/github.com/`
   - Go(pkg)のパス(ex):
     - `$HOME/.go/src`

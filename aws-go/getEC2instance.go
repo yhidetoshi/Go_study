@@ -1,32 +1,39 @@
-
 package main
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/ec2"
 )
 
 func main() {
-
 	svc := ec2.New(session.New(), &aws.Config{Region: aws.String("ap-northeast-1")})
 
-	// Call the DescribeInstances Operation
-	resp, err := svc.DescribeInstances(nil)
-	if err != nil{
+	res, err := svc.DescribeInstances(nil)
+	if err != nil {
 		panic(err)
 	}
 
-	fmt.Println("インスタンス合計数", len(resp.Reservations))
+	var tagName string
 
-	for index, _ := range resp.Reservations {
-		//fmt.Println(len(res.Instances))
+	for _, resInfo := range res.Reservations {
+		for _, instanceInfo := range resInfo.Instances {
 
-		for _, inst := range resp.Reservations[index].Instances{
-			fmt.Print("インスタンス情報\t" , *inst.InstanceId, "\t", *inst.ImageId, "\t", *inst.PrivateIpAddress, "\t", *inst.SubnetId, "\t", *inst.InstanceType, "\n")
-
+			for _, tagInfo := range instanceInfo.Tags {
+				if *tagInfo.Key == "Name" {
+					tagName = *tagInfo.Value
+				}
+			}
+			fmt.Println("{")
+			fmt.Println(
+				" InstanceNmae:\t"+tagName+"\n",
+				   "InstanceType:\t"+*instanceInfo.InstanceType+"\n",
+				   "AvailabilityZone:\t"+*instanceInfo.Placement.AvailabilityZone+"\n",
+				   "State:\t"+*instanceInfo.State.Name+"\n",
+				   "PrivateIP:\t"+*instanceInfo.PrivateIpAddress,
+			)
+			fmt.Println("}\n")
 		}
 	}
-
 }

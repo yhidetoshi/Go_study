@@ -16,7 +16,8 @@
     - 基礎からわかる Go言語
     - Paiza
     - Tools作り
-  - Gogland(pkg)のパス(ex):
+    - aws-sdk-goを使ったツール作り
+  - Gogland(pkg)のパス(ex):
     - `$HOME/go/src/github.com/`
   - Go(pkg)のパス(ex):
     - `$HOME/.go/src`

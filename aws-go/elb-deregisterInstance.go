@@ -11,7 +11,7 @@ import (
 func main(){
 	fmt.Println(os.Args)
 
-	if len(os.Args) <= 2{
+	if len(os.Args) != 3{
 		fmt.Println("引数エラー")
 		os.Exit(1)
 	}

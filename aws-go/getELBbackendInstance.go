@@ -8,7 +8,7 @@ import (
 )
 
 func main(){
-	elbName := "beaconnect-lb-1"
+	elbName := "ELBName"
 	var inserviceInstances []string
 
 	svc := elb.New(session.New(), &aws.Config{Region: aws.String("ap-northeast-1")})

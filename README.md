@@ -1,6 +1,6 @@
 ![Alt Text](https://github.com/yhidetoshi/Pictures/raw/master/Go_study/Golang-top.png)
 
-## Go言語 study
+## Go言語 やっていること
 
 
 

@@ -17,7 +17,8 @@
     - Paiza
     - Tools作り
     - aws-sdk-goを使ったツール作り
-  - Gogland(pkg)のパス(ex):
+    - aws-sdk-goとFlagを使ったCLIツール作成(https://github.com/yhidetoshi/clitoolgoaws)
+  - Gogland(pkg)のパス(ex):
     - `$HOME/go/src/github.com/`
   - Go(pkg)のパス(ex):
     - `$HOME/.go/src`

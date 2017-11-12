@@ -19,7 +19,7 @@
     - aws-sdk-goを使ったツール作り
     - aws-sdk-goとFlagを使ったCLIツール作成(https://github.com/yhidetoshi/clitoolgoaws)
     - PointerのMemo (https://github.com/yhidetoshi/Go_study/tree/master/Training/Pointer/README.md)
-    - StructのMemo (https://github.com/yhidetoshi/Go_study/blob/master/Training/Struct/README.md)
+    - StructのMemo (https://github.com/yhidetoshi/Go_study/blob/master/Training/Struct/README.md)
   - Gogland(pkg)のパス(ex):
     - `$HOME/go/src/github.com/`
   - Go(pkg)のパス(ex):

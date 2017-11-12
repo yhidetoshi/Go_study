@@ -14,3 +14,37 @@
 
 - ポインタ配列
   - Go 言語の配列名は配列の先頭アドレスを表していません。また、配列にアドレス演算子を適用すると、配列へのポインタが生成されますが、それは配列の先頭アドレスを表しているわけではありません。Go 言語の配列はひとつの「値」なので、配列へのポインタは配列そのものを指し示すことになります。
+
+
+### メソッドの `ポイントレシーバ` と `変数レシーバ`
+
+```
+type Vertex struct {
+	X, Y float64
+}
+
+func (v *Vertex) Scale(f float64) {
+	v.X = v.X * f
+	v.Y = v.Y * f
+}
+
+func ScaleFunc(v *Vertex, f float64) {
+	v.X = v.X * f
+	v.Y = v.Y * f
+}
+
+```
+
+- ポイントレシーバ
+  - 呼び出し時に、変数、または、ポインタのいずれかのレシーバとして取ることができる
+
+```
+var v Vertex
+ScaleFunc(v)  // Compile error!
+ScaleFunc(&v) // OK
+
+var v Vertex
+v.Scale(5)  // OK
+p := &v
+p.Scale(10) // OK
+```

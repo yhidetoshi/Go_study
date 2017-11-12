@@ -48,3 +48,18 @@ v.Scale(5)  // OK
 p := &v
 p.Scale(10) // OK
 ```
+
+- 変数レシーバ
+  - メソッドが変数レシーバである場合、呼び出し時に、変数、または、ポインタのいずれかのレシーバとして取ることができる
+
+```
+var v Vertex
+fmt.Println(AbsFunc(v))  // OK
+fmt.Println(AbsFunc(&v)) // Compile error!
+
+var v Vertex
+fmt.Println(v.Abs()) // OK
+p := &v
+fmt.Println(p.Abs()) // OK
+```
+

@@ -15,7 +15,7 @@
   - A Tour of Go (https://go-tour-jp.appspot.com/welcome/1)
   - 基礎からわかる Go言語
   - Goならわかるシステムプログラミング
-  - Paiza
+  - Paiza
   - Tools作り (https://github.com/yhidetoshi/Go_study/tree/master/tools)
   - aws-sdk-goを使ったツール作り
   - aws-sdk-goとFlagを使ったCLIツール作成(https://github.com/yhidetoshi/clitoolgoaws)

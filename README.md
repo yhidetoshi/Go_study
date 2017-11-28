@@ -30,6 +30,7 @@
 - macOS
   - `brew install go`
   - `go version`
+  - GOPATHを通す
 
 - MacOS上でコーディングしたコードを Amazon Linux上で実行するためにクロスコンパイルする
   - `$ GOOS=linux GOARCH=amd64 go build {FILENAME}`

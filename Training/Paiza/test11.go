@@ -29,7 +29,7 @@ func getMonth(n int) {
 	case 11:
 		fmt.Println("November")
 	case 12:
-		fmt.Println("	December")
+		fmt.Println("December")
 	}
 
 }

@@ -18,7 +18,7 @@ func main() {
 	fmt.Scan(&n1, &n2, &n3, &n4, &n5, &n6)
 	fmt.Scan(&pullN) // おみくじを引く回数を入力
 
-	inputNum := [6]int{n1, n2, n3, n4, n5, n6}
+	inputNum := [N]int{n1, n2, n3, n4, n5, n6}
 	result := make([]int, pullN)
 
 	// 当選確認

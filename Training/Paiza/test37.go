@@ -12,17 +12,16 @@ func main() {
 
 	var pullN int                  // おみくじを引く回数
 	var n1, n2, n3, n4, n5, n6 int //選んだ番号を入力
-	var a1, a2, a3, a4, a5, a6 int
-	//var [pullN]int result
+	var a1, a2, a3, a4, a5, a6 int //当選番号入力
 	hitCnt := 0
 
 	fmt.Scan(&n1, &n2, &n3, &n4, &n5, &n6)
 	fmt.Scan(&pullN) // おみくじを引く回数を入力
-	//inputNum := make([]int, 6, 6)
+
 	inputNum := [6]int{n1, n2, n3, n4, n5, n6}
-	//hitCnt := make([]int, pullN)
 	result := make([]int, pullN)
 
+	// 当選確認
 	for i := 0; i < pullN; i++ {
 		fmt.Scan(&a1, &a2, &a3, &a4, &a5, &a6)
 		hitNum := [6]int{a1, a2, a3, a4, a5, a6}
@@ -33,9 +32,11 @@ func main() {
 				}
 			}
 		}
-		//fmt.Println(hitCnt)
 		result[i] = hitCnt
 		hitCnt = 0
 	}
-	fmt.Println(result)
+	// 結果出力
+	for l := 0; l < pullN; l++ {
+		fmt.Println(result[l])
+	}
 }

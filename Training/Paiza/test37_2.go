@@ -37,7 +37,7 @@ func main() {
 		hitCnt = 0
 	}
 	// 結果出力
-	for l := 0; l < pullN; l++ {
-		fmt.Println(result[l])
+	for _, _result := range result {
+		fmt.Println(_result)
 	}
 }

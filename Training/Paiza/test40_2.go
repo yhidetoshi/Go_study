@@ -15,14 +15,14 @@ func strStdin() (stringInput string) {
 	return
 }
 
-func judgeRoom(_roomN int) {
+func judgeRoom(_dislikeN string, _roomN int) []string {
+	var result []string
 
 	for i := 0; i < _roomN; i++ {
 		inputRoom := strStdin()
-		dislikeN := strStdin()
 
-		if (strings.Contains(inputRoom, dislikeN)) == false {
-			result := append(result, inputRoom)
+		if (strings.Contains(inputRoom, _dislikeN)) == false {
+			result = append(result, inputRoom)
 		}
 	}
 	return result
@@ -38,14 +38,11 @@ func outputResult(_result ...string) {
 }
 
 func main() {
-	//var dislikeN, inputRoom string
+	dislikeN := strStdin()
 	var roomN int
-	var result []string
+	fmt.Scan(&roomN)
 
-	fmt.Scan(&dislikeN, &roomN)
-
-	result = judgeRoom(roomN)
-	// 結果を出力
+	result := judgeRoom(dislikeN, roomN)
 	outputResult(result...)
 
 }

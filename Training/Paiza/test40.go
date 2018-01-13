@@ -1,32 +1,48 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"strings"
 )
 
-func main() {
-	var dislikeN, inputRoom string
-	var roomN, counter int
+func strStdin() (stringInput string) {
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Scan()
+	stringInput = scanner.Text()
+	stringInput = strings.TrimSpace(stringInput)
+	return
+}
+
+func judgeRoom(_dislikeN string, _roomN int) []string {
 	var result []string
 
-	fmt.Scan(&dislikeN, &roomN)
+	for i := 0; i < _roomN; i++ {
+		inputRoom := strStdin()
 
-	// 部屋を入力
-	for i := 0; i < roomN; i++ {
-		fmt.Scan(&inputRoom)
-		if (strings.Contains(inputRoom, dislikeN)) == false {
+		if (strings.Contains(inputRoom, _dislikeN)) == false {
 			result = append(result, inputRoom)
-			counter++
 		}
 	}
+	return result
+}
 
-	// 結果の出力
-	for j := 0; j < len(result); j++ {
-		fmt.Println(result[j])
+func outputResult(_result ...string) {
+	for _, output := range _result {
+		fmt.Println(output)
 	}
-	if counter == 0 {
+	if len(_result) == 0 {
 		fmt.Println("none")
 	}
+}
+
+func main() {
+	dislikeN := strStdin()
+	var roomN int
+	fmt.Scan(&roomN)
+
+	result := judgeRoom(dislikeN, roomN)
+	outputResult(result...)
 
 }

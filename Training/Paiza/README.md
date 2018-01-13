@@ -31,3 +31,4 @@ fmt.Println(strings.Repeat(aster, num))
   - `ch_str`の文字列に `in_str` が含まれているかを判定（真偽値）
 
 - `strings.Replace(strBefore, "False", "True", -1)`
+- `strings.Replace(strBefore, "at", "@", -1)`

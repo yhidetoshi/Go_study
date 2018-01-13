@@ -1,10 +1,26 @@
 # 　使った構文Memo
 
-- **標準入力**
+- **標準入力その１**
 ```
 var num int
 fmt.Scan(&num)
 ```
+
+- **標準入力2**
+```
+func StrStdin() (stringInput string) {
+	scanner := bufio.NewScanner(os.Stdin)
+
+	scanner.Scan()
+	stringInput = scanner.Text()
+	stringInput = strings.TrimSpace(stringInput)
+	return
+}
+
+
+input = StrStdin()
+```
+
 - `strings.Repeat(somethingString, Number)`
   - `Number` の分だけ `somethingString`　を繰り返す
 ```

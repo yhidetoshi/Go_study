@@ -4,20 +4,21 @@ import (
 	"fmt"
 )
 
-type Animal interface{
+type Animal interface {
 	Cry()
 }
 
-type Dog struct {}
-func (d *Dog) Cry(){
+type Dog struct{}
+
+func (d *Dog) Cry() {
 	fmt.Println("Wanwan")
 }
 
-type Cat struct {}
-func (c *Cat) Cry(){
+type Cat struct{}
+
+func (c *Cat) Cry() {
 	fmt.Println("Nya-nya")
 }
-
 
 func MakeAnimalCry(a Animal) {
 	fmt.Println("DoCry!")

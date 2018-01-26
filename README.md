@@ -33,6 +33,6 @@
   - GOPATHを通す
 
 - MacOS上でコーディングしたコードを Amazon Linux上で実行するためにクロスコンパイルする
-  - `$ GOOS=linux GOARCH=amd64 go build {FILENAME}`
+  - `$ GOOS=linux GOARCH=amd64 go build -o {FREE_FILENAME} {TARGET}.go`
 - Windows用
-  - `GOOS=windows GOARCH=amd64 go build {FILENAME}`
+  - `GOOS=windows GOARCH=amd64 go build -o {FREE_FILENAME} {TARGET}.go`

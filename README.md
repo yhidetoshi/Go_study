@@ -21,9 +21,7 @@
   - aws-sdk-goを使ったツール作り
   - aws-sdk-goとFlagを使ったCLIツール作成(https://github.com/yhidetoshi/clitoolgoaws)
   - Serverless-Lambda(GO)の学習 (https://github.com/yhidetoshi/serverless-dev-go)
-  - PointerのMemo (https://github.com/yhidetoshi/Go_study/tree/master/Training/Pointer/README.md)
-  - StructのMemo (https://github.com/yhidetoshi/Go_study/blob/master/Training/Struct/README.md)
-- Goパス(ex):
+  - Goパス(ex):
   - ```export GOPATH=`pwd` ```
   - `$go env`
     

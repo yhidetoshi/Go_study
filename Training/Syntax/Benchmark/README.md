@@ -1,6 +1,6 @@
 # Benchmark
 
-- Helloworkdでベンチーマクする例
+- Hellowordでベンチーマクする例
 ```
 package bench
 

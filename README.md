@@ -20,9 +20,8 @@
   - Tools作り (https://github.com/yhidetoshi/Go_study/tree/master/tools)
   - aws-sdk-goを使ったツール作り
   - aws-sdk-goとFlagを使ったCLIツール作成(https://github.com/yhidetoshi/clitoolgoaws)
-  - PointerのMemo (https://github.com/yhidetoshi/Go_study/tree/master/Training/Pointer/README.md)
-  - StructのMemo (https://github.com/yhidetoshi/Go_study/blob/master/Training/Struct/README.md)
-- Goパス(ex):
+  - Serverless-Lambda(GO)の学習 (https://github.com/yhidetoshi/serverless-dev-go)
+  - Goパス(ex):
   - ```export GOPATH=`pwd` ```
   - `$go env`
     
@@ -33,6 +32,6 @@
   - GOPATHを通す
 
 - MacOS上でコーディングしたコードを Amazon Linux上で実行するためにクロスコンパイルする
-  - `$ GOOS=linux GOARCH=amd64 go build {FILENAME}`
+  - `$ GOOS=linux GOARCH=amd64 go build -o {FREE_FILENAME} {TARGET}.go`
 - Windows用
-  - `GOOS=windows GOARCH=amd64 go build {FILENAME}`
+  - `GOOS=windows GOARCH=amd64 go build -o {FREE_FILENAME} {TARGET}.go`

@@ -20,6 +20,9 @@ func BenchmarkHello(b *testing.B) {
   - 入力して実行すると、Helloに一致するベンチマークが実行されます。
 - `go test -bench .`
 
+- `go test -count N` (N回数)
+  - `go test -count 2`
+
 
 
 ```

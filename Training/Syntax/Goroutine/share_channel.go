@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+//  チャンネルの共有
 func reciver(ch <-chan int) {
 	for {
 		i := <-ch

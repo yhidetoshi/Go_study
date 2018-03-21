@@ -1,16 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-type Person struct{
+type Person struct {
 	Name string
 }
 
-func (p Person) Greet(msg string){
-	fmt.Println(p.Name)
+func (p Person) Greet(msg string) {
+	fmt.Printf("%s %s\n", msg, p.Name)
 }
 
-func main(){
-	p := Person{Name: "Hide"}
-	p.Greet("hi")
+func main() {
+	p := Person{Name: "hide"}
+	p.Greet("hello!!!")
 }

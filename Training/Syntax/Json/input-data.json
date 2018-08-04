@@ -1,0 +1,7 @@
+[
+  {"id":1,"name":"yamada","birthday":"07-07","v_info":{"color":"red","weapon":"Rang"}},
+  {"id":2,"name":"tanaka","birthday":"08-20","v_info":{"color":"blue","weapon":"Impact"}},
+  {"id":3,"name":"suzuki","birthday":"09-30","v_info":{"color":"green","weapon":"Blade"}},
+  {"id":4,"name":"miyamoto","birthday":"01-11","v_info":{"color":"yellow","weapon":"Collider"}},
+  {"id":0,"name":"rei"}
+]

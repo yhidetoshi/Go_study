@@ -1,3 +1,8 @@
+/*
+https://qiita.com/nayuneko/items/2ec20ba69804e8bf7ca3
+より学習
+*/
+
 package main
 
 import (
@@ -41,4 +46,3 @@ func main() {
 	fmt.Println(out.String())
 
 }
-

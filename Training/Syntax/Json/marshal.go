@@ -29,3 +29,11 @@ func main(){
   }
 
 }
+
+/* OUTPUT
+1 : yamada`
+2 : tanaka`
+3 : suzuki`
+4 : miyamoto`
+0 : rei`
+*/

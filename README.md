@@ -24,8 +24,8 @@
     - https://github.com/yhidetoshi/serverless-dev-go
     - https://github.com/yhidetoshi/Golang-Lambda
   - Goパス(ex):
-  - ```export GOPATH=`pwd` ```
-  - `$go env`
+    - ```export GOPATH=`pwd` ```
+    - `$go env`
     
 ## Goのインストール
 - macOS

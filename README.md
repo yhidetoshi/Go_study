@@ -10,7 +10,9 @@
   - Goバージョン:  
     - go1.9
   - IDE: 
-    - Gogland (https://www.jetbrains.com/go/)
+    - Gogland (https://www.jetbrains.com/go/) ※ Goglandが無料で使えた時に使用
+  - エディタ
+    - Atom + Go plugin
 - 学習
   - A Tour of Go (https://go-tour-jp.appspot.com/welcome/1)
   - 基礎からわかる Go言語(書籍)
@@ -20,10 +22,12 @@
   - Tools作り (https://github.com/yhidetoshi/Go_study/tree/master/tools)
   - aws-sdk-goを使ったツール作り
   - aws-sdk-goとFlagを使ったCLIツール作成(https://github.com/yhidetoshi/clitoolgoaws)
-  - Serverless-Lambda(GO)の学習 (https://github.com/yhidetoshi/serverless-dev-go)
+  - Serverless-Lambda(GO)の学習 
+    - https://github.com/yhidetoshi/serverless-dev-go
+    - https://github.com/yhidetoshi/Golang-Lambda
   - Goパス(ex):
-  - ```export GOPATH=`pwd` ```
-  - `$go env`
+    - ```export GOPATH=`pwd` ```
+    - `$go env`
     
 ## Goのインストール
 - macOS

@@ -23,6 +23,10 @@ func main() {
 	p := &Person{Name: n, Age: 20}
 
 	fmt.Println(p.String())
+
+  var stringer fmt.Stringer = p
+  fmt.Println(stringer.String())
+
 }
 
 /*

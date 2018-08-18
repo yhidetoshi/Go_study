@@ -27,7 +27,7 @@ type person struct {
 	firstName string
 	lastName  string
 }
-
+  
 func (p *person) Name() string {
 	return p.firstName + " " + p.lastName
 }

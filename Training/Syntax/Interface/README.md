@@ -6,6 +6,8 @@
 ### String()
 - type Stringer
 
+- https://github.com/golang/go/blob/master/src/fmt/print.go
+  - go言語のgithubで定義している箇所
 ```
 type Stringer interface{
   String() string
@@ -22,7 +24,8 @@ type Builder struct {
 }
 ```
 
-- A Builder is used to efficiently build a string using Write methods. It minimizes memory copying. The zero value is ready to use. Do not copy a non-zero Builder.
+- https://golang.org/pkg/strings/#Builder
+  - A Builder is used to efficiently build a string using Write methods. It minimizes memory copying. The zero value is ready to use. Do not copy a non-zero Builder.
 ```
 type Builder struct {
         // contains filtered or unexported fields

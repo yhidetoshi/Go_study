@@ -17,7 +17,9 @@
   - https://golang.org/
     - https://golang.org/pkg/
   - Effective Go
-    - https://golang.org/doc/effective_go.html  
+    - https://golang.org/doc/effective_go.html
+  - Goのコード(GitHub)
+    - https://github.com/golang/go/tree/master/src/strings
   - A Tour of Go (https://go-tour-jp.appspot.com/welcome/1)
   - 基礎からわかる Go言語(書籍)
   - Goならわかるシステムプログラミング(書籍)

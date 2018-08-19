@@ -8,9 +8,9 @@
   - interface (interfaceDocument.go)
   - mixin (interfaceDocumentMixin.go)
   - DuckType (interfaceDocumetDuckType.go)
-  - overide
+  - overide (interfaceDocumentOverride.go)
   - interface型
-  - Generics
+  - Generics (interfaceDocumentGenerics.go)
   - interfaceの設計
   - tag
 

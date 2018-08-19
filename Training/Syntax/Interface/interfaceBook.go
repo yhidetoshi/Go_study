@@ -24,6 +24,11 @@ fmt.Stringer インターフェース
 type Stringer interface {
 	String() string
 }
+
+type ByteReader interface {
+        ReadByte() (byte, error)
+}
+
 */
 
 

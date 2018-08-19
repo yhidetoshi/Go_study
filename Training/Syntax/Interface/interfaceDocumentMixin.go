@@ -38,6 +38,10 @@ func main() {
 	acsr.SetText("fugaaaaa")
 	fmt.Println(acsr.GetText())
 
+  /*
+  Pageは Document を継承しているので
+  Accessor Interfaceを満たすので代入が可能
+  */
   var acsr2 Accessor = &Page{}
   acsr2.SetText("mixinnnnnnn")
   fmt.Println(acsr2.GetText())

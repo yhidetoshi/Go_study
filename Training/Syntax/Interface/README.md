@@ -1,6 +1,20 @@
 # Interfaceについてのめも
 
 
+## Interfaceの種類
+- 参考
+  - http://jxck.hatenablog.com/entry/20130325/1364251563
+- type
+  - interface (interfaceDocument.go)
+  - mixin (interfaceDocumentMixin.go)
+  - DuckType (interfaceDocumetDuckType.go)
+  - overide
+  - interface型
+  - Generics
+  - interfaceの設計
+  - tag
+
+
 ## fmtパッケージ
 
 ### String()

@@ -39,9 +39,8 @@ func MakeAnimalCry(a Animal) {
 
 func main() {
 	dog := new(Dog)
-	cat := new(Cat)
-	MakeDogCry(dog)
-	MakeCatCry(cat)
+	//cat := new(Cat)
+	MakeAnimalCry(dog)
 }
 
 /* README.md

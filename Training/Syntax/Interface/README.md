@@ -16,6 +16,37 @@ type Stringer interface{
 - func(b *Builder) String() string
 
 
+- https://golang.org/pkg/fmt/#Print
+  - func Print
+    - `func Print(a ...interface{}) (n int, err error)`
+      - Printは interface型を受けるので、どんなものを受け取る
+  - func Printf
+    - `func Printf(format string, a ...interface{}) (n int, err error)`
+      - formatで受けるので、 %dや%vなど指定してから値を受ける
+
+- fmtパッケージのPrint関数
+```
+// 標準出力へ書き出す関数
+func Print(a ...interface{}) (n int, err error)
+func Println(a ...interface{}) (n int, err error)
+func Printf(format string, a ...interface{}) (n int, err error)
+
+// ファイル（io.Writer）へ書き出す関数
+func Fprint(w io.Writer, a ...interface{}) (n int, err error)
+func Fprintln(w io.Writer, a ...interface{}) (n int, err error)
+func Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error)
+
+// 結果を string 値として返す関数
+func Sprint(a ...interface{}) string
+func Sprintln(a ...interface{}) string
+func Sprintf(format string, a ...interface{}) string
+
+// エラーを生成する関数
+func Errorf(format string, a ...interface{}) error
+```
+- `→ fmt.Prinln , fmt.Printf("%d", val)`
+
+
 - https://golang.org/src/strings/builder.go
 ```
 type Builder struct {

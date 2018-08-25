@@ -3,66 +3,51 @@ package main
 import (
 	"fmt"
 	"os"
-  "time"
-  "sort"
-  "strings"
+	"sort"
+	"strings"
+	"time"
 
-  "github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ec2"
 )
 
 var (
-  config = aws.Config{Region: aws.String("ap-northeast-1")}
-	svc = ec2.New(session.New(&config))
+	config = aws.Config{Region: aws.String("ap-northeast-1")}
+	svc    = ec2.New(session.New(&config))
+	layout = "2006-01-02T15:04:05"
 )
 
 func main() {
+	amilist := ListAMI()
+	times := make([]time.Time, len(amilist))
 
-  // ec2
-  result := getInstanceInfo()
-	for v, _ := range result {
-		fmt.Println(result[v])
+	for i, _ := range amilist {
+		times[i], _ = time.Parse(layout, strings.Replace(amilist[i][1], ".000Z", "", 1))
 	}
 
-  //ami
-  amilist := ListAMI()
-  const layout = "2006-01-02T15:04:05"
-  times := make([]time.Time, len(amilist))
+	sort.Slice(times, func(i, j int) bool { return times[i].Before(times[j]) })
 
-  //fmt.Println(amilist)
+	for i := 0; i < len(times); i++ {
+		for j := 0; j < len(times); j++ {
 
-
-  for i, _ := range amilist {
-    times[i], _ = time.Parse(layout, strings.Replace(amilist[i][1], ".000Z", "", 1))
-  }
-
-
-  //times := make([]time.Time, 3)
-/*
-  times[0], _ = time.Parse(DFmt, "2018-06-29T10:33:59.000Z")
-  times[1], _ = time.Parse(DFmt, "2018-07-02T06:26:02.000Z")
-  times[2], _ = time.Parse(DFmt, "2018-06-29T10:10:06.000Z")
-*/
-/*
-  times[0], _ = time.Parse(DFmt, strings.Replace("2018-06-29T10:33:59.000Z", ".000Z", "", 1))
-  times[1], _ = time.Parse(DFmt, strings.Replace("2018-07-02T06:26:02.000Z", ".000Z", "", 1))
-  times[2], _ = time.Parse(DFmt, strings.Replace("2018-06-29T10:10:06.000Z", ".000Z", "", 1))
-*/
-  sort.Slice(times, func(i, j int) bool { return times[i].Before(times[j]) })
-
-    for _, t := range times {
-        fmt.Printf("%+v\n", t)
-    }
+			if amilist[i][1] == timeToString(times[j])+".000Z" {
+				fmt.Printf("%s %s\n", amilist[j][0], amilist[j][1])
+			}
+		}
+	}
 }
 
+func timeToString(t time.Time) string {
+	str := t.Format(layout)
+	return str
+}
 
 func ListAMI() [][]string {
 	var owner, images []*string
 	var _owner []string = []string{"self"}
-	// Convert []string to []*string
-	owner = aws.StringSlice(_owner)
 
+	owner = aws.StringSlice(_owner)
 	params := &ec2.DescribeImagesInput{
 		ImageIds: images,
 		Owners:   owner,
@@ -73,20 +58,16 @@ func ListAMI() [][]string {
 		os.Exit(1)
 	}
 
-
-
 	allAmiInfo := [][]string{}
 	for _, resInfo := range res.Images {
 		amiInfo := []string{
 			*resInfo.ImageId,
-      *resInfo.CreationDate,
+			*resInfo.CreationDate,
 		}
 		allAmiInfo = append(allAmiInfo, amiInfo)
 	}
-    //fmt.Println(allAmiInfo)
-    return allAmiInfo
+	return allAmiInfo
 }
-
 
 func DeregisterAMI(ec2AMIid *string) {
 	params := &ec2.DeregisterImageInput{
@@ -100,27 +81,3 @@ func DeregisterAMI(ec2AMIid *string) {
 	fmt.Println("Success!!")
 }
 
-
-func getInstanceInfo() []string {
-	var tagName string
-	var instances []string
-
-	params := &ec2.DescribeInstancesInput{}
-	res, err := svc.DescribeInstances(params)
-	if err != nil {
-		fmt.Println(err.Error())
-		os.Exit(1)
-	}
-
-	for _, resInfo := range res.Reservations {
-		for _, instanceInfo := range resInfo.Instances {
-			for _, tagInfo := range instanceInfo.Tags {
-				if *tagInfo.Key == "Name" {
-					tagName = *tagInfo.Value
-				}
-			}
-			instances = append(instances, tagName)
-		}
-	}
-	return instances
-}

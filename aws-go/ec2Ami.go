@@ -19,25 +19,32 @@ var (
 )
 
 func main() {
-	amilist := ListAMI()
-	times := make([]time.Time, len(amilist))
 
-	for i, _ := range amilist {
-		times[i], _ = time.Parse(layout, strings.Replace(amilist[i][1], ".000Z", "", 1))
+	amiList := ListAMI()
+	times := make([]time.Time, len(amiList))
+	var sortedAmiList = []string{}
+
+	// trim ".000Z"
+	for i, _ := range amiList {
+		times[i], _ = time.Parse(layout, strings.Replace(amiList[i][1], ".000Z", "", 1))
+		amiList[i][1] = strings.Replace(amiList[i][1], ".000Z", "", 1)
 	}
 
+	// sort by createTime
 	sort.Slice(times, func(i, j int) bool { return times[i].Before(times[j]) })
 
-	for i := 0; i < len(times); i++ {
-		for j := 0; j < len(times); j++ {
-
-			if amilist[i][1] == timeToString(times[j])+".000Z" {
-				fmt.Printf("%s %s\n", amilist[j][0], amilist[j][1])
+	for i, _ := range amiList {
+		for j, _ := range amiList {
+			if amiList[i][1] == timeToString(times[j]) {
+				sortedAmiList = append(sortedAmiList, amiList[j][0])
+				//fmt.Printf("%s %s\n", amiList[j][0], amiList[j][1])
 			}
 		}
 	}
+	fmt.Println(sortedAmiList)
 }
 
+// convert time to string
 func timeToString(t time.Time) string {
 	str := t.Format(layout)
 	return str
@@ -80,4 +87,3 @@ func DeregisterAMI(ec2AMIid *string) {
 	}
 	fmt.Println("Success!!")
 }
-

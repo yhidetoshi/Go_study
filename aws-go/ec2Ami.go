@@ -48,7 +48,7 @@ func main() {
 
 	// deregister ami
 	for i := 0; i < (len(sortedAmiList) - KEEPNUM); i++ {
-		//DeregisterAMI(sortedAmiList[ (len(sortedAmiList) - i) ])
+		DeregisterAMI(sortedAmiList[ (len(sortedAmiList) - i) ])
 	}
 	fmt.Println("Fin")
 }

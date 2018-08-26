@@ -12,6 +12,10 @@ import (
 	"github.com/aws/aws-sdk-go/service/ec2"
 )
 
+const (
+	KEEPNUM = 2
+)
+
 var (
 	config = aws.Config{Region: aws.String("ap-northeast-1")}
 	svc    = ec2.New(session.New(&config))
@@ -37,11 +41,16 @@ func main() {
 		for j, _ := range amiList {
 			if amiList[i][1] == timeToString(times[j]) {
 				sortedAmiList = append(sortedAmiList, amiList[j][0])
-				//fmt.Printf("%s %s\n", amiList[j][0], amiList[j][1])
+				fmt.Printf("%s %s\n", amiList[j][0], amiList[j][1])
 			}
 		}
 	}
-	fmt.Println(sortedAmiList)
+
+	// deregister ami
+	for i := 0; i < (len(sortedAmiList) - KEEPNUM); i++ {
+		//DeregisterAMI(sortedAmiList[ (len(sortedAmiList) - i) ])
+	}
+	fmt.Println("Fin")
 }
 
 // convert time to string
@@ -50,6 +59,7 @@ func timeToString(t time.Time) string {
 	return str
 }
 
+// get ami list
 func ListAMI() [][]string {
 	var owner, images []*string
 	var _owner []string = []string{"self"}
@@ -76,14 +86,20 @@ func ListAMI() [][]string {
 	return allAmiInfo
 }
 
-func DeregisterAMI(ec2AMIid *string) {
+// remove ami
+func DeregisterAMI(ec2AMIid string) {
+	fmt.Printf("%s deleted", ec2AMIid)
+
+	// for pointer to params
+	var _ec2AMIid *string
+	_ec2AMIid = &ec2AMIid
+
 	params := &ec2.DeregisterImageInput{
-		ImageId: ec2AMIid,
+		ImageId: _ec2AMIid,
 	}
 	_, err := svc.DeregisterImage(params)
 	if err != nil {
 		fmt.Println(err.Error())
 		os.Exit(1)
 	}
-	fmt.Println("Success!!")
 }

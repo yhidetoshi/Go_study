@@ -34,23 +34,24 @@ func main() {
 		amiList[i][1] = strings.Replace(amiList[i][1], ".000Z", "", 1)
 	}
 
-	// sort by createTime
+	// sort by createTime(ascending order)
 	sort.Slice(times, func(i, j int) bool { return times[i].Before(times[j]) })
 
 	for i, _ := range amiList {
 		for j, _ := range amiList {
-			if amiList[i][1] == timeToString(times[j]) {
+			if timeToString(times[i]) == amiList[j][1] {
 				sortedAmiList = append(sortedAmiList, amiList[j][0])
-				fmt.Printf("%s %s\n", amiList[j][0], amiList[j][1])
+				//fmt.Printf("%s %s\n", amiList[j][0], amiList[j][1])
 			}
 		}
 	}
+	//fmt.Println(len(sortedAmiList))
 
-	// deregister ami
+	// deregister ami(older)
 	for i := 0; i < (len(sortedAmiList) - KEEPNUM); i++ {
-		DeregisterAMI(sortedAmiList[ (len(sortedAmiList) - i) ])
+		DeregisterAMI(sortedAmiList[i])
 	}
-	fmt.Println("Fin")
+	fmt.Println("Deleted \nFin")
 }
 
 // convert time to string
@@ -88,9 +89,9 @@ func ListAMI() [][]string {
 
 // remove ami
 func DeregisterAMI(ec2AMIid string) {
-	fmt.Printf("%s deleted", ec2AMIid)
+	fmt.Printf("%s \n", ec2AMIid)
 
-	// for pointer to params
+	// using pointer for params
 	var _ec2AMIid *string
 	_ec2AMIid = &ec2AMIid
 

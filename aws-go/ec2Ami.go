@@ -16,6 +16,7 @@ import (
 
 const (
 	KEEPNUM = 2
+	SSMPARA = "source_ami_id"
 )
 
 var (
@@ -28,7 +29,7 @@ var (
 func main() {
 
 	var sortedAmiList = []string{}
-	ssmPara := "source_ami_id"
+	ssmPara := SSMPARA
 
 	sourceAmiId := GetSourceAmi(&ssmPara)
 	//fmt.Println(sourceAmiId)
@@ -56,7 +57,10 @@ func main() {
 
 	// deregister ami(older)
 	for i := 0; i < (len(sortedAmiList) - KEEPNUM); i++ {
-		DeregisterAMI(sortedAmiList[i])
+		// excluded source ami
+		if sourceAmiId != sortedAmiList[i] {
+			DeregisterAMI(sortedAmiList[i])
+		}
 	}
 	fmt.Println("Deleted \nFin")
 }

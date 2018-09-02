@@ -48,7 +48,7 @@ func main() {
 
 	for i, _ := range amiList {
 		for j, _ := range amiList {
-			if timeToString(times[i]) == amiList[j][1] {
+			if TimeToString(times[i]) == amiList[j][1] {
 				sortedAmiList = append(sortedAmiList, amiList[j][0])
 				//fmt.Printf("%s %s\n", amiList[j][0], amiList[j][1])
 			}
@@ -66,7 +66,7 @@ func main() {
 }
 
 // convert time to string
-func timeToString(t time.Time) string {
+func TimeToString(t time.Time) string {
 	str := t.Format(layout)
 	return str
 }

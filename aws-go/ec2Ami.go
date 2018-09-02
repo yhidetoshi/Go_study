@@ -7,6 +7,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/aws/aws-sdk-go/service/ssm"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ec2"
@@ -18,15 +20,21 @@ const (
 
 var (
 	config = aws.Config{Region: aws.String("ap-northeast-1")}
-	svc    = ec2.New(session.New(&config))
+	svcEc2 = ec2.New(session.New(&config))
+	svcSsm = ssm.New(session.New(&config))
 	layout = "2006-01-02T15:04:05"
 )
 
 func main() {
 
+	var sortedAmiList = []string{}
+	ssmPara := "source_ami_id"
+
+	sourceAmiId := GetSourceAmi(&ssmPara)
+	//fmt.Println(sourceAmiId)
+
 	amiList := ListAMI()
 	times := make([]time.Time, len(amiList))
-	var sortedAmiList = []string{}
 
 	// trim ".000Z"
 	for i, _ := range amiList {
@@ -45,7 +53,6 @@ func main() {
 			}
 		}
 	}
-	//fmt.Println(len(sortedAmiList))
 
 	// deregister ami(older)
 	for i := 0; i < (len(sortedAmiList) - KEEPNUM); i++ {
@@ -60,6 +67,23 @@ func timeToString(t time.Time) string {
 	return str
 }
 
+// get ssm parameter
+func GetSourceAmi(sourceAmi *string) string {
+	var _sourceAmi string
+	params := &ssm.GetParameterInput{
+		Name: sourceAmi,
+	}
+	res, err := svcSsm.GetParameter(params)
+	if err != nil {
+		fmt.Println(err.Error())
+		os.Exit(1)
+	}
+	_sourceAmi = *res.Parameter.Value
+
+	return _sourceAmi
+
+}
+
 // get ami list
 func ListAMI() [][]string {
 	var owner, images []*string
@@ -70,7 +94,7 @@ func ListAMI() [][]string {
 		ImageIds: images,
 		Owners:   owner,
 	}
-	res, err := svc.DescribeImages(params)
+	res, err := svcEc2.DescribeImages(params)
 	if err != nil {
 		fmt.Println(err.Error())
 		os.Exit(1)
@@ -98,9 +122,10 @@ func DeregisterAMI(ec2AMIid string) {
 	params := &ec2.DeregisterImageInput{
 		ImageId: _ec2AMIid,
 	}
-	_, err := svc.DeregisterImage(params)
+	_, err := svcEc2.DeregisterImage(params)
 	if err != nil {
 		fmt.Println(err.Error())
 		os.Exit(1)
 	}
 }
+

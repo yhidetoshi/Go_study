@@ -11,9 +11,9 @@
     - go1.9
   - IDE:
     - Gogland (https://www.jetbrains.com/go/) ※ Goglandが無料で使えた時に使用
+    - Goland
   - エディタ
     - Atom + Go plugin
-    - Goland
 - 学習
   - https://golang.org/
     - https://golang.org/pkg/

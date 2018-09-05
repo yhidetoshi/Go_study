@@ -7,16 +7,15 @@ import (
 	"strings"
 	"time"
 
-	"github.com/aws/aws-sdk-go/service/ssm"
-
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ec2"
+	"github.com/aws/aws-sdk-go/service/ssm"
 )
 
 const (
-	KEEPNUM = 2
-	SSMPARA = "source_ami_id"
+	KEEPNUM       = 0
+	SSMSEARCHWORD = "_source_ami"
 )
 
 var (
@@ -26,15 +25,26 @@ var (
 	layout = "2006-01-02T15:04:05"
 )
 
+type Params struct {
+	Name, Value []*string
+}
+
 func main() {
 
 	var sortedAmiList = []string{}
-	ssmPara := SSMPARA
+	var excludedSourceAmi = []string{}
+	var excludedSourceAmiId = []string{}
+	var checkFlag = true
 
-	sourceAmiId := GetSourceAmi(&ssmPara)
-	//fmt.Println(sourceAmiId)
+	// 除外されるssmパラメータのkeyを取得
+	excludedSourceAmi = FetchSsmParams()
 
-	amiList := ListAMI()
+	// 除外されるssmパラメータの値(ami-id)を取得
+	for i, _ := range excludedSourceAmi {
+		excludedSourceAmiId = append(excludedSourceAmiId, GetSourceAmi(&excludedSourceAmi[i]))
+	}
+
+	amiList := GetListAMI()
 	times := make([]time.Time, len(amiList))
 
 	// trim ".000Z"
@@ -45,7 +55,6 @@ func main() {
 
 	// sort by createTime(ascending order)
 	sort.Slice(times, func(i, j int) bool { return times[i].Before(times[j]) })
-
 	for i, _ := range amiList {
 		for j, _ := range amiList {
 			if TimeToString(times[i]) == amiList[j][1] {
@@ -55,12 +64,18 @@ func main() {
 		}
 	}
 
-	// deregister ami(older)
+	// 不要なAMI削除 | checkFlag is true -> delete
 	for i := 0; i < (len(sortedAmiList) - KEEPNUM); i++ {
-		// excluded source ami
-		if sourceAmiId != sortedAmiList[i] {
-			DeregisterAMI(sortedAmiList[i])
+		for j, _ := range excludedSourceAmiId {
+			if sortedAmiList[i] == excludedSourceAmiId[j] {
+				checkFlag = false
+			}
 		}
+		if checkFlag == true {
+			//DeregisterAMI(sortedAmiList[i])
+			fmt.Println(sortedAmiList[i])
+		}
+		checkFlag = true
 	}
 	fmt.Println("Deleted \nFin")
 }
@@ -71,7 +86,7 @@ func TimeToString(t time.Time) string {
 	return str
 }
 
-// get ssm parameter
+// ssmパラメータで指定したkeyでvalueを返す
 func GetSourceAmi(sourceAmi *string) string {
 	var _sourceAmi string
 	params := &ssm.GetParameterInput{
@@ -88,8 +103,28 @@ func GetSourceAmi(sourceAmi *string) string {
 
 }
 
-// get ami list
-func ListAMI() [][]string {
+// ssmパラメータから `_source_ami` に該当するkeyを返す
+func FetchSsmParams() []string {
+
+	allSourceAmi := []string{}
+	//var result []string
+	params := &ssm.DescribeParametersInput{}
+	res, err := svcSsm.DescribeParameters(params)
+	if err != nil {
+		fmt.Println(err.Error())
+		os.Exit(1)
+	}
+
+	for _, value := range res.Parameters {
+		if strings.Contains(*value.Name, SSMSEARCHWORD) {
+			allSourceAmi = append(allSourceAmi, *value.Name)
+		}
+	}
+	return allSourceAmi
+}
+
+// 登録されているAMI一覧を返す
+func GetListAMI() [][]string {
 	var owner, images []*string
 	var _owner []string = []string{"self"}
 
@@ -115,7 +150,7 @@ func ListAMI() [][]string {
 	return allAmiInfo
 }
 
-// remove ami
+// AMI-IDを指定してイメージを削除(登録解除)する
 func DeregisterAMI(ec2AMIid string) {
 	fmt.Printf("%s \n", ec2AMIid)
 
@@ -132,4 +167,3 @@ func DeregisterAMI(ec2AMIid string) {
 		os.Exit(1)
 	}
 }
-

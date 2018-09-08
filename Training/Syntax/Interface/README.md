@@ -154,3 +154,6 @@ type Writer interface {
 }
 ```
 → io.Writer インターフェースはFprintfとその呼び出し元との間の契約を定義している
+
+# aws-sdk-goで使ってみた
+- https://github.com/yhidetoshi/Go_study/blob/master/aws-go/getAmiLcNumsInterface.go

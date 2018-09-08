@@ -11,6 +11,7 @@
     - go1.9
   - IDE:
     - Gogland (https://www.jetbrains.com/go/) ※ Goglandが無料で使えた時に使用
+    - Goland
   - エディタ
     - Atom + Go plugin
 - 学習
@@ -27,6 +28,8 @@
   - Paiza
   - Tools作り (https://github.com/yhidetoshi/Go_study/tree/master/tools)
   - aws-sdk-goを使ったツール作り
+    - (ex) AMIの自動削除(最新のN個を残す & ssmパラメータAMIは対象外)
+      - https://github.com/yhidetoshi/Go_study/blob/master/aws-go/ec2Ami.go
   - aws-sdk-goとFlagを使ったCLIツール作成(https://github.com/yhidetoshi/clitoolgoaws)
   - Serverless-Lambda(GO)の学習
     - https://github.com/yhidetoshi/serverless-dev-go

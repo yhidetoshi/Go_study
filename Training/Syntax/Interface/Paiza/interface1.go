@@ -11,7 +11,6 @@ type Calc interface{
 }
 
 type Info struct{
-	Calc
 	saraly int
 	multiNum int
 	bonus int

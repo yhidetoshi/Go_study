@@ -15,10 +15,10 @@
   - エディタ
     - Atom + Go plugin
 - 学習
+  - http://golang.jp/go_spec
   - https://golang.org/
     - https://golang.org/pkg/
   - Effective Go
-    - http://golang.jp/go_spec
     - https://golang.org/doc/effective_go.html
   - Goのコード(GitHub)
     - https://github.com/golang/go/tree/master/src/strings

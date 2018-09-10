@@ -15,7 +15,7 @@ type Info interface{
 }
 
 type Clothes struct {
-	clothe []string
+	clothe []string{}
 }
 
 func main(){

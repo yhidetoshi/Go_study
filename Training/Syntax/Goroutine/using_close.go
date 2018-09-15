@@ -18,7 +18,7 @@ func recive(name string, ch <-chan int) {
 }
 
 func main() {
-	ch := make(chan int, 20)
+	ch := make(chan int, 10)
 
 	go recive("1st goroutine", ch)
 	go recive("2nd goroutine", ch)

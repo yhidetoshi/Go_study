@@ -3,7 +3,7 @@ package main
 func main() {
 	ch1 := make(chan int)
 	ch2 := make(chan int)
-	ch2 := make(chan int)
+	ch3 := make(chan int)
 
 	/* ch1から受信した整数を2倍してch2へ送信*/
 	go func() {

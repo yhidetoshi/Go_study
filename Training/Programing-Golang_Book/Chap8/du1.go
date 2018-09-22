@@ -56,3 +56,8 @@ func dirents(dir string) []os.FileInfo{
 	}
 	return entries
 }
+
+/* 実行結果
+go run du1.go /usr
+179627 files 4.8 GB
+*/

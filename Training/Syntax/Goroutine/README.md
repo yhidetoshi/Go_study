@@ -4,6 +4,7 @@
 
 - channel
   - 1つのgoroutineが他のgorutineへ値を送ることができるようにする仕組み
+  - 送受信が完了するまでブロックする
   - チャネル作成
     - `ch := make(chan int)`
 

@@ -26,3 +26,26 @@ ch = make(chan int, 0) // バッファなしチャネル
 ch = make(chan int, 3) // 容量が3であるバッファありチャネル
 ```
 
+### WaitGroup
+- syncパッケージのWaitGroup
+
+| メソッド | 説明 | 
+|:----:|:-----:|
+| Add() | WaitGroup のカウンタを上げる|
+| Done() | WaitGroup のカウンタを下げる|
+| Wait() | WaitGroup のカウンタが0になるまで待つ|
+
+- サンプルコード
+```
+func main(){
+	var wg sync.WaitGroup
+	for i :=0; i<3; i++{
+		wg.Add(1)
+		go func(i int){
+			fmt.Println(i)
+			wg.Done()
+		}(i)
+	}
+	wg.Wait()
+}
+```

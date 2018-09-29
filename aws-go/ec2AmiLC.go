@@ -35,7 +35,6 @@ type Nums struct {
 
 func main() {
 	var c Calc = &Nums{}
-	PostSlack(c.GetAmiNums(), c.GetLCNums())
 
 	fmt.Println(c.GetAmiNums())
 	fmt.Println(c.GetLCNums())

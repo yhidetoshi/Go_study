@@ -1,11 +1,7 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
-	"net/http"
-	"net/url"
 	"os"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -15,10 +11,9 @@ import (
 )
 
 var (
-	config            = aws.Config{Region: aws.String("ap-northeast-1")}
-	svcEc2            = ec2.New(session.New(&config))
-	svcAsg            = autoscaling.New(session.New(&config))
-	WebhookUrl string = URL
+	config = aws.Config{Region: aws.String("ap-northeast-1")}
+	svcEc2 = ec2.New(session.New(&config))
+	svcAsg = autoscaling.New(session.New(&config))
 )
 
 type Calc interface {
@@ -32,12 +27,11 @@ type Nums struct {
 	lcNumbers  int
 }
 
-
 func main() {
 	var c Calc = &Nums{}
 
-	fmt.Println(c.GetAmiNums())
-	fmt.Println(c.GetLCNums())
+	fmt.Printf("AMIs %d\n", c.GetAmiNums())
+	fmt.Printf("LCs %d\n", c.GetLCNums())
 }
 
 // 登録されているAMI数を返す
@@ -73,4 +67,3 @@ func (n *Nums) GetLCNums() int {
 	n.lcNumbers = len(res.LaunchConfigurations)
 	return n.lcNumbers
 }
-

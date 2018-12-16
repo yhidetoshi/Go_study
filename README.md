@@ -12,7 +12,6 @@
   - IDE:
     - Gogland (https://www.jetbrains.com/go/) ※ Goglandが無料で使えた時に使用
     - Goland
-  - エディタ
     - Atom + Go plugin
 - 学習
   - http://golang.jp/go_spec

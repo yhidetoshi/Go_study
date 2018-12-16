@@ -35,6 +35,8 @@
   - Serverless-Lambda(GO)の学習
     - https://github.com/yhidetoshi/serverless-dev-go
     - https://github.com/yhidetoshi/Golang-Lambda
+  - Slack
+    - https://github.com/yhidetoshi/Go_study/tree/master/Training/Slack
   - Goパス(ex):
     - ```export GOPATH=`pwd` ```
     - `$go env`

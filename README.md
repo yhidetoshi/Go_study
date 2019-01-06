@@ -13,7 +13,7 @@
     - Gogland (https://www.jetbrains.com/go/) ※ Goglandが無料で使えた時に使用
     - Goland
     - Atom + Go plugin
-- 学習
+- 学習&開発
   - http://golang.jp/go_spec
   - https://golang.org/
     - https://golang.org/pkg/

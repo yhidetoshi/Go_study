@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	WEBHOOKURL = "https://hooks.slack.com/services/XXXXXXXXXXX"
+	WEBHOOKURL = "https://hooks.slack.com/services/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"
 	CHANNEL    = "dev"
 	USERNAME   = "GoBot"
 )
@@ -17,9 +17,10 @@ func main() {
 
 func PostSlack(msg string) {
 	field1 := slack.Field{Title: "Message", Value: msg}
+	field2 := slack.Field{Title: "AnythingKey", Value: "AnythingValue"}
 
 	attachment := slack.Attachment{}
-	attachment.AddField(field1)
+	attachment.AddField(field1).AddField(field2)
 	color := "good"
 	attachment.Color = &color
 	payload := slack.Payload{

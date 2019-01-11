@@ -1,5 +1,7 @@
 # Interfaceについてのめも
 
+- インターフェースについて、ブログにまとめた
+  - https://yhidetoshi.github.io/2018/12/go%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9%E3%82%92%E5%AD%A6%E7%BF%92%E3%81%99%E3%82%8B%E3%81%9F%E3%81%AE%E3%83%A1%E3%83%A2/
 
 ## Interfaceの種類
 - 参考

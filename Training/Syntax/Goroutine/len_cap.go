@@ -8,3 +8,8 @@ func main() {
 	fmt.Println(len(ch))
 	fmt.Println(cap(ch))
 }
+
+/* 実行結果
+1
+3
+*/

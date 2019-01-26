@@ -20,3 +20,11 @@ func main() {
 		fmt.Println("ここへは到達しない")
 	}
 }
+
+/* 実行結果 1回目
+receive from ch2
+*/
+
+/* 実行結果 2回目
+receive from ch1
+*/

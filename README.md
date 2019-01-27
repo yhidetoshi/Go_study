@@ -25,6 +25,7 @@
   - 基礎からわかる Go言語(書籍)
   - Goならわかるシステムプログラミング(書籍)
   - プログラミング言語Go(書籍)
+  - Go言語による並行処理(書籍)
   - Paiza
   - Tools作り (https://github.com/yhidetoshi/Go_study/tree/master/tools)
   - aws-sdk-goを使ったツール作り

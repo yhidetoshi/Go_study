@@ -31,6 +31,9 @@ func (d *Document) SetText(text string) {
 
 func main() {
 	var doc *Document = &Document{}
+	fmt.Println(&Document{})
+	fmt.Println(*doc)
+
 	doc.SetText("hogeee")
 	fmt.Println(doc.GetText())
 

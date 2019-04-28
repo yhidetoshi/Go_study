@@ -25,12 +25,14 @@
   - 基礎からわかる Go言語(書籍)
   - Goならわかるシステムプログラミング(書籍)
   - プログラミング言語Go(書籍)
+  - Go言語による並行処理(書籍)
   - Paiza
   - Tools作り (https://github.com/yhidetoshi/Go_study/tree/master/tools)
   - aws-sdk-goを使ったツール作り
     - (ex) AMIの自動削除(最新のN個を残す & ssmパラメータAMIは対象外)
       - https://github.com/yhidetoshi/Go_study/blob/master/aws-go/ec2Ami.go
-  - aws-sdk-goとFlagを使ったCLIツール作成(https://github.com/yhidetoshi/clitoolgoaws)
+  - `ore-aws`(aws-sdk-goとFlagを使ったCLIツール作成)
+    - https://github.com/yhidetoshi/go-awscli-tool
   - Mackerel-Plugin開発
     - https://github.com/yhidetoshi/mackerel-plugin-awsbilling 
   - Serverless-Lambda(GO)の学習

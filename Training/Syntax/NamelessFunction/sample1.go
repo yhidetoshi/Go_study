@@ -22,3 +22,7 @@ func main() {
 
 	fmt.Println(ret)
 }
+
+/*  実行結果
+<<Golang>>
+*/

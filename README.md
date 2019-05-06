@@ -45,6 +45,8 @@
     - https://github.com/yhidetoshi/Golang-Lambda
   - GolangCI
     - https://github.com/yhidetoshi/GolangCI-Dev
+  - NatureRemo-Mackerel可視化連携
+    - https://github.com/yhidetoshi/natureRemo-mackerel
   - Slack
     - https://github.com/yhidetoshi/Go_study/tree/master/Training/Slack
   - Goパス(ex):

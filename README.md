@@ -31,10 +31,15 @@
   - aws-sdk-goを使ったツール作り
     - (ex) AMIの自動削除(最新のN個を残す & ssmパラメータAMIは対象外)
       - https://github.com/yhidetoshi/Go_study/blob/master/aws-go/ec2Ami.go
+      - https://github.com/yhidetoshi/GoAWSDeleteAmisLaunchConfigsTool
   - `ore-aws`(aws-sdk-goとFlagを使ったCLIツール作成)
     - https://github.com/yhidetoshi/go-awscli-tool
-  - Mackerel-Plugin開発
+  - Mackerel (Plugin/Tool) 開発
     - https://github.com/yhidetoshi/mackerel-plugin-awsbilling 
+    - https://github.com/yhidetoshi/mackerelCPUAlertTool
+    - https://github.com/yhidetoshi/mackerelCheckAutoRetireFail
+  - Cloud Function (Google Cloud)
+    - https://github.com/yhidetoshi/gcloud-function-examples
   - Serverless-Lambda(GO)の学習
     - https://github.com/yhidetoshi/serverless-dev-go
     - https://github.com/yhidetoshi/Golang-Lambda
